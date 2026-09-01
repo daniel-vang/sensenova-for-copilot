@@ -112,7 +112,9 @@ export class SenseNovaChatProvider implements vscode.LanguageModelChatProvider {
 
 		const models = await this.getModels();
 		const modelDef = models.find((m) => m.id === modelInfo.id);
-		const maxTokens = getMaxTokens() ?? 8192;
+		const configuredMaxTokens = getMaxTokens();
+		const defaultMaxTokens = Math.min(modelDef?.maxOutputTokens ?? 8192, 65536);
+		const maxTokens = configuredMaxTokens ?? defaultMaxTokens;
 		const reasoningEffort = getReasoningEffort();
 
 		const resolvedMessages = stripImagesIfNeeded(messages, modelDef);

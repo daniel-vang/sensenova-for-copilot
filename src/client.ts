@@ -1,5 +1,4 @@
 import type { CancellationToken } from 'vscode';
-import { logger } from './logger';
 import type {
 	SenseNovaRequest,
 	SenseNovaStreamEvent,
