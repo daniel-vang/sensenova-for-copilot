@@ -2,7 +2,7 @@
   "name": "sensenova-for-copilot",
   "displayName": "SenseNova for Copilot Chat",
   "description": "SenseNova (商汤日日新) models in GitHub Copilot Chat — auto-discovers all available models from your account. Thinking mode, vision, agent tools — zero config, BYOK.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "publisher": "danielwang",
   "license": "MIT",
   "icon": "resources/icon.png",
