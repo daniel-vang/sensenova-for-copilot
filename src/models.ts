@@ -1,4 +1,3 @@
-import vscode from 'vscode';
 import { logger } from './logger';
 import type { ModelDefinition } from './types';
 
@@ -19,11 +18,9 @@ interface ModelsResponse {
 const FALLBACK_MODELS: ModelDefinition[] = [
 	{ id: 'sensenova-6.8-flash-lite', name: 'SenseNova 6.8 Flash-Lite', family: 'sensenova', version: '6.8', detail: 'Lightweight multimodal agent model', maxInputTokens: 262144, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: true, thinking: true }, requiresThinkingParam: false },
 	{ id: 'deepseek-v4-flash', name: 'DeepSeek V4 Flash', family: 'deepseek', version: 'v4', detail: 'High-performance reasoning model (1M context)', maxInputTokens: 1048576, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: false, thinking: true }, requiresThinkingParam: false },
-	{ id: 'glm-5.2', name: 'GLM-5.2', family: 'glm', version: '5.2', detail: 'Flagship long-context model (1M context, 128K output)', maxInputTokens: 1048576, maxOutputTokens: 131072, capabilities: { toolCalling: true, imageInput: false, thinking: true }, requiresThinkingParam: false },
+	{ id: 'glm-5.2', name: 'GLM-5.2', family: 'glm', version: '5.2', detail: 'Flagship long-context model (1M context, 128K output)', maxInputTokens: 1048576, maxOutputTokens: 131072, capabilities: { toolCalling: true, imageInput: false, thinking: false }, requiresThinkingParam: false },
 	{ id: 'deepseek-v4-pro', name: 'DeepSeek V4 PRO', family: 'deepseek', version: 'v4', detail: 'High-performance reasoning model (1M context)', maxInputTokens: 1048576, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: false, thinking: true }, requiresThinkingParam: false },
-	{ id: 'kimi-k3', name: 'Kimi K3', family: 'kimi', version: 'k3', detail: 'High-performance reasoning model (1M context)', maxInputTokens: 1048576, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: false, thinking: true }, requiresThinkingParam: false },
-	{ id: 'sensenova-u1-fast', name: 'SenseNova U1 Fast', family: 'sensenova', version: 'u1', detail: 'Infographic generation model', maxInputTokens: 262144, maxOutputTokens: 65536, capabilities: { toolCalling: false, imageInput: false, thinking: false }, requiresThinkingParam: false },
-	{ id: 'sensenova-u1.5-lite', name: 'SenseNova U1.5 Lite', family: 'sensenova', version: 'u1.5', detail: 'Lightweight multimodal model', maxInputTokens: 262144, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: true, thinking: true }, requiresThinkingParam: false },
+	{ id: 'kimi-k3', name: 'Kimi K3', family: 'kimi', version: 'k3', detail: 'High-performance multimodal reasoning model (1M context)', maxInputTokens: 1048576, maxOutputTokens: 65536, capabilities: { toolCalling: true, imageInput: true, thinking: true }, requiresThinkingParam: false },
 ];
 
 function apiModelToDefinition(m: ApiModel): ModelDefinition {
