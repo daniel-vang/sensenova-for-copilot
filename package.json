@@ -1,0 +1,141 @@
+{
+  "name": "sensenova-for-copilot",
+  "displayName": "SenseNova for Copilot Chat",
+  "description": "SenseNova (商汤日日新) models in GitHub Copilot Chat — auto-discovers all available models from your account. Thinking mode, vision, agent tools — zero config, BYOK.",
+  "version": "0.1.4",
+  "publisher": "danielwang",
+  "license": "MIT",
+  "icon": "resources/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniel-vang/sensenova-for-copilot"
+  },
+  "engines": {
+    "vscode": "^1.116.0",
+    "node": ">=24"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "AI",
+    "Chat",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "sensenova",
+    "copilot",
+    "github copilot",
+    "copilot chat",
+    "vision",
+    "byok",
+    "language model",
+    "thinking",
+    "reasoning",
+    "ai",
+    "chat",
+    "商汤",
+    "日日新"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "enabledApiProposals": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "sensenova",
+        "displayName": "SenseNova"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sensenova-copilot.setApiKey",
+        "title": "SenseNova: Set API Key"
+      },
+      {
+        "command": "sensenova-copilot.getApiKey",
+        "title": "SenseNova: Get API Key"
+      },
+      {
+        "command": "sensenova-copilot.clearApiKey",
+        "title": "SenseNova: Clear API Key"
+      },
+      {
+        "command": "sensenova-copilot.openSettings",
+        "title": "SenseNova: Open Settings"
+      },
+      {
+        "command": "sensenova-copilot.showLogs",
+        "title": "SenseNova: Show Logs"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "sensenovaGettingStarted",
+        "title": "SenseNova for Copilot Chat",
+        "description": "Set up SenseNova models in Copilot Chat.",
+        "steps": [
+          {
+            "id": "setApiKey",
+            "title": "Set your SenseNova API key",
+            "description": "[Get an API key](command:sensenova-copilot.getApiKey) from platform.sensenova.cn.\n[Set API Key](command:sensenova-copilot.setApiKey)",
+            "media": {
+              "markdown": "resources/walkthrough/set-api-key.md"
+            },
+            "completionEvents": [
+              "onCommand:sensenova-copilot.setApiKey"
+            ]
+          },
+          {
+            "id": "showModels",
+            "title": "Show SenseNova models",
+            "description": "If the models are hidden, open VS Code's Language Models manager and show the SenseNova models.\n[Open Language Models](command:workbench.action.chat.manage)",
+            "media": {
+              "markdown": "resources/walkthrough/show-models.md"
+            }
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "SenseNova Copilot",
+      "properties": {
+        "sensenova-copilot.maxTokens": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Maximum number of output tokens per request. Set to 0 to use the API default. Useful for controlling costs."
+        },
+        "sensenova-copilot.modelIdOverrides": {
+          "type": "object",
+          "default": {},
+          "description": "Override the API model ID sent for each SenseNova model. Change them only when using a compatible third-party API that uses different model names.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "oxlint",
+    "format": "oxfmt --write src/",
+    "format:check": "oxfmt --check src/",
+    "package": "vsce package -o dist/",
+    "publish": "vsce publish",
+    "login": "vsce login danielwang"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/vscode": "^1.116.0",
+    "@vscode/vsce": "^3.9.1",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
+    "typescript": "^6.0.3"
+  }
+}
