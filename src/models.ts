@@ -28,7 +28,7 @@ function apiModelToDefinition(m: ApiModel): ModelDefinition {
 	const mo = m.input_modalities ?? [];
 	return {
 		id: m.id, name: m.name || m.id,
-		family: m.id.includes('deepseek') ? 'deepseek' : m.id.includes('glm') ? 'glm' : 'sensenova',
+		family: m.id.includes('deepseek') ? 'deepseek' : m.id.includes('glm') ? 'glm' : m.id.includes('kimi') ? 'kimi' : 'sensenova',
 		version: '', detail: m.description || m.id,
 		maxInputTokens: m.context_length ?? 128000, maxOutputTokens: m.max_output_length ?? 8192,
 		capabilities: { toolCalling: f.includes('tools'), imageInput: mo.includes('image'), thinking: f.includes('reasoning') },
