@@ -36,7 +36,7 @@ export interface SenseNovaRequest {
 	messages: SenseNovaMessage[];
 	stream: boolean;
 	tools?: SenseNovaTool[];
-	thinking?: { type: 'adaptive' | 'disabled' };
+	output_config?: { effort: string };
 	temperature?: number;
 	top_p?: number;
 }

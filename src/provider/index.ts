@@ -1,7 +1,7 @@
 import vscode from 'vscode';
 import { AuthManager } from '../auth';
 import { SenseNovaClient } from '../client';
-import { getApiModelId, getMaxTokens } from '../config';
+import { getApiModelId, getMaxTokens, getReasoningEffort } from '../config';
 import { API_KEY_REQUIRED_DETAIL, DEFAULT_BASE_URL } from '../consts';
 import { logger } from '../logger';
 import { fetchModelsFromApi, FALLBACK_MODELS } from '../models';
@@ -112,8 +112,8 @@ export class SenseNovaChatProvider implements vscode.LanguageModelChatProvider {
 
 		const models = await this.getModels();
 		const modelDef = models.find((m) => m.id === modelInfo.id);
-		const isThinkingModel = modelDef?.capabilities.thinking ?? false;
 		const maxTokens = getMaxTokens() ?? 8192;
+		const reasoningEffort = getReasoningEffort();
 
 		const resolvedMessages = stripImagesIfNeeded(messages, modelDef);
 		const systemPrompt = extractSystemPrompt(resolvedMessages);
@@ -131,7 +131,7 @@ export class SenseNovaChatProvider implements vscode.LanguageModelChatProvider {
 					messages: anthropicMessages,
 					stream: true,
 					tools,
-					thinking: undefined,
+					output_config: reasoningEffort ? { effort: reasoningEffort } : undefined,
 				},
 				{
 					onContent: (content: string) => {

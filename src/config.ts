@@ -13,3 +13,9 @@ export function getMaxTokens(): number | undefined {
 	const value = config.get<number>('maxTokens', 0);
 	return value > 0 ? value : undefined;
 }
+
+export function getReasoningEffort(): string | undefined {
+	const config = vscode.workspace.getConfiguration(CONFIG_SECTION);
+	const value = config.get<string>('reasoningEffort', '');
+	return value && /^(low|medium|high)$/.test(value) ? value : undefined;
+}
